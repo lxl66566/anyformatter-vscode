@@ -1,23 +1,27 @@
 # anyformatter-vscode
 
-VS Code extension for Haskell code formatting based on [anyformatter tool](https://github.com/tweag/anyformatter)
+VS Code extension for formatting any file using external command.
 
 ## Usage
 
-1. Install <https://github.com/tweag/anyformatter>
-2. Use VS Code's built-in format or format selection commands.
+1. Install <https://github.com/lxl66566/anyformatter-vscode>
+2. Edit `settings.json` to add your formatter command and arguments. Example:
+   ```json
+   "anyformatter": {
+     "toml": { "command": "taplo fmt -" },
+     "nix": { "command": "nixfmt -" }
+   },
+   ```
+3. Set anyformatter as default formatter.
+   ```json
+   "[toml]": {
+     "editor.formatOnSave": true,
+     "editor.defaultFormatter": "lxl66566.anyformatter-vscode"
+   },
+   "[nix]": {
+     "editor.formatOnSave": true,
+     "editor.defaultFormatter": "lxl66566.anyformatter-vscode"
+   },
+   ```
 
-## Extension settings
-
-Example
-
-```json
-{
-  "anyformatter.path": "~/anyformatter-Linux/anyformatter",
-  "anyformatter.args": ["--no-cabal"]
-}
-```
-
-## Credits
-
-Code and configuration for the Extension is based on https://github.com/sergey-kintsel/hfmt-vscode by Sergey Kintsel
+Note that the external formatter must be able to accept stdin and output to stdout.

@@ -1,7 +1,5 @@
 import * as vscode from "vscode";
-
 const configurationKey = "anyformatter";
-const languagesConfigurationKey = `${configurationKey}.languages`;
 
 export type FormatterConfig = {
 	command: string;
@@ -9,17 +7,23 @@ export type FormatterConfig = {
 
 export type LanguageConfigs = Record<string, FormatterConfig>;
 
-const getConfig: <ConfigType>(key: string) => ConfigType | undefined = <
-	ConfigType,
->(
-	key: string,
-) => vscode.workspace.getConfiguration().get<ConfigType>(key);
-
-export const getLanguagesConfig: () => LanguageConfigs | undefined = () => {
-	return getConfig<LanguageConfigs>(languagesConfigurationKey);
+export const getAllConfig: () => vscode.WorkspaceConfiguration = () => {
+	return vscode.workspace.getConfiguration(configurationKey);
 };
 
-export const logLanguagesConfig = (log: vscode.OutputChannel) => {
+export const getLanguageConfig: (
+	language: string,
+) => FormatterConfig | undefined = (language: string) =>
+	getAllConfig().get(language);
+
+export const getKeys: () => Promise<string[]> = async () => {
+	const supportedLanguages = await vscode.languages.getLanguages();
+	return Object.keys(getAllConfig()).filter((key) =>
+		supportedLanguages.includes(key),
+	);
+};
+
+export const logAllConfig = (log: vscode.OutputChannel) => {
 	log.appendLine("Languages Configuration:");
-	log.appendLine(`\t${JSON.stringify(getLanguagesConfig())}`);
+	log.appendLine(`\t${JSON.stringify(getAllConfig())}`);
 };

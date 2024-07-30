@@ -19,27 +19,30 @@
   "contributes": {
     "configuration": {
       "title": "anyformatter",
-      "type": "object",
       "properties": {
-        "anyformatter.notifyOnParseError": {
-          "type": "boolean",
-          "default": false,
-          "description": "If set to true, notify you every time anyformatter fails to parse a file"
-        },
-        "anyformatter.path": {
-          "type": "string",
-          "default": "anyformatter",
-          "description": "Path to the anyformatter executable."
+        "anyformatter": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "Command used as external formatter. Processes content received via stdin and must output the formatted result via stdout."
+              }
+            },
+            "required": [
+              "command"
+            ]
+          }
         }
       }
     }
   },
   "scripts": {
     "p": "vsce package",
-    "c": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile",
-    "test": "node ./out/test/runTest.js"
+    "publish": "vsce publish",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
