@@ -16,8 +16,7 @@ VS Code extension for formatting any file using external command.
      "editor.defaultFormatter": "lxl66566.anyformatter-vscode"
    },
    ```
-
-Then: ↓↓↓
+3. Then: see below ↓↓↓ for all changes, the extension must be restarted to take effect.
 
 ### stdin and stdout
 

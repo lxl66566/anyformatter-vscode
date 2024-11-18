@@ -1,14 +1,17 @@
 // for testing
 {
+  "oxc.enable": true,
   "anyformatter": {
     "toml": {
-      "command": "taplo fmt",
+      "command": "taplo fmt -"
+    },
+    "txt": {
+      "command": "python tests/test.py",
       "file": true,
       "format_on_save": true
     }
   },
   "[toml]": {
-    "editor.formatOnSave": false
-  },
-  "oxc.enable": true
+    "editor.formatOnSave": true
+  }
 }

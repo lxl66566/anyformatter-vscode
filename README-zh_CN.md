@@ -16,7 +16,7 @@ VS Code 插件，用于使用外部自定义命令格式化任意文件。
      "editor.defaultFormatter": "lxl66566.anyformatter-vscode"
    },
    ```
-3. 请看下文 ↓↓↓
+3. 请看下文 ↓↓↓ 所有更改都必须重启扩展才能生效。
 
 ### stdin and stdout
 
