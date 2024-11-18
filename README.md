@@ -66,3 +66,5 @@ If you still want to format on save, you can use the `format_on_save` option pro
   },
 },
 ```
+
+So that you can format on save. Now the key(`"toml"`) matches the file extension.

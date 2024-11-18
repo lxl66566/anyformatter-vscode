@@ -47,10 +47,10 @@ export async function activate(context: vscode.ExtensionContext) {
       log.appendLine(`Register type: file`);
       const fileformat = vscode.languages.registerDocumentFormattingEditProvider(language, {
         provideDocumentFormattingEdits(document, _options, _token) {
-          const filePath = document.uri.fsPath;
+          const file_path = document.uri.fsPath;
           try {
             let cmd = setting.command;
-            cmd += ` "${filePath}"`;
+            cmd += ` "${file_path}"`;
             const cwd = vscode.workspace.getWorkspaceFolder(document.uri)?.uri.fsPath;
             log.appendLine(`Calling: \`${cmd}\` in \`${cwd}\``);
             const output = cp.execSync(cmd, {
@@ -73,10 +73,10 @@ export async function activate(context: vscode.ExtensionContext) {
     else {
       log.appendLine(`Register type: file with format_on_save`);
       const disposable = vscode.workspace.onDidSaveTextDocument(async (document) => {
-        if (document.languageId !== language) return;
-        const filePath = document.uri.fsPath;
+        const file_path = document.uri.fsPath;
+        if (file_path.split(".").pop() !== language) return;
         let cmd = setting.command;
-        cmd += ` "${filePath}"`;
+        cmd += ` "${file_path}"`;
         const cwd = vscode.workspace.getWorkspaceFolder(document.uri)?.uri.fsPath;
         try {
           log.appendLine(`Calling: \`${cmd}\` in \`${cwd}\``);
