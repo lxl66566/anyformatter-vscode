@@ -1,0 +1,14 @@
+// for testing
+{
+  "anyformatter": {
+    "toml": {
+      "command": "taplo fmt",
+      "file": true,
+      "format_on_save": true
+    }
+  },
+  "[toml]": {
+    "editor.formatOnSave": false
+  },
+  "oxc.enable": true
+}
